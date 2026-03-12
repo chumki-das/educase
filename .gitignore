@@ -1,0 +1,7 @@
+venv/
+__pycache__/
+*.pyc
+.DS_Store
+buildlog.txt
+static/case_study_image*.png
+static/case_study_audio*.mp3
