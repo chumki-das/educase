@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduCase — Bring Learning to Life</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --sage: #C8D8B4;
+            --sage-dark: #8FAF72;
+            --peach: #F2C4A0;
+            --peach-light: #FDE8D8;
+            --cream: #FDF6EC;
+            --mint: #B8E0D4;
+            --mint-dark: #5BA898;
+            --blush: #F5D0C5;
+            --text-dark: #2D2A26;
+            --text-mid: #6B6560;
+            --text-light: #A89E96;
+            --white: #FFFDF9;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: var(--cream);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .header-band {
+            background: var(--sage);
+            padding: 14px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-row { display: flex; align-items: center; gap: 10px; }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .logo-badge {
+            background: var(--text-dark);
+            color: var(--cream);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 20px;
+            letter-spacing: 0.05em;
+        }
+
+        .hero {
+            background: var(--sage);
+            padding: 60px 40px 80px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-eyebrow {
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-mid);
+            margin-bottom: 16px;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(36px, 6vw, 58px);
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.15;
+            max-width: 700px;
+            margin: 0 auto 20px;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--mint-dark);
+        }
+
+        .hero-sub {
+            font-size: 16px;
+            color: var(--text-mid);
+            max-width: 480px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .floatie { position: absolute; font-size: 28px; opacity: 0.7; }
+        .floatie-1 { top: 30px; left: 8%; }
+        .floatie-2 { top: 50px; right: 10%; font-size: 22px; }
+        .floatie-3 { bottom: 60px; left: 5%; font-size: 20px; }
+        .floatie-4 { bottom: 40px; right: 7%; font-size: 24px; }
+
+        .wave { display: block; width: 100%; margin-top: -2px; }
+
+        .intro-section {
+            background: var(--cream);
+            padding: 50px 40px 40px;
+            text-align: center;
+        }
+
+        .intro-label {
+            font-size: 11px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .intro-card {
+            background: var(--white);
+            border: 2px solid var(--text-dark);
+            border-radius: 24px;
+            padding: 36px 40px;
+            max-width: 600px;
+            margin: 0 auto 16px;
+            box-shadow: 6px 6px 0px var(--peach);
+        }
+
+        .intro-name {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+        }
+
+        .intro-desc {
+            color: var(--text-mid);
+            font-size: 15px;
+            line-height: 1.6;
+            max-width: 420px;
+            margin: 0 auto;
+        }
+
+        .form-section {
+            background: var(--cream);
+            padding: 20px 40px 60px;
+        }
+
+        .section-question {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .question-pill {
+            display: inline-block;
+            background: var(--peach);
+            border: 2px solid var(--text-dark);
+            border-radius: 30px;
+            padding: 8px 24px;
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-style: italic;
+            color: var(--text-dark);
+            box-shadow: 3px 3px 0 var(--text-dark);
+        }
+
+        .form-card {
+            background: var(--white);
+            border: 2px solid var(--text-dark);
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 6px 6px 0px var(--sage-dark);
+        }
+
+        .field-group { margin-bottom: 22px; }
+
+        label {
+            display: block;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 7px;
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 13px 16px;
+            border: 2px solid #E8E0D5;
+            border-radius: 12px;
+            font-size: 15px;
+            font-family: 'Nunito', sans-serif;
+            background: var(--cream);
+            color: var(--text-dark);
+            transition: border-color 0.2s, box-shadow 0.2s;
+            font-weight: 600;
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: var(--text-light);
+            font-weight: 400;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--mint-dark);
+            box-shadow: 0 0 0 3px #5BA89820;
+            background: white;
+        }
+
+        textarea { height: 90px; resize: vertical; }
+
+        .toggles-header { margin-bottom: 14px; }
+
+        .toggles-title {
+            font-weight: 800;
+            color: var(--text-dark);
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .toggles-sub {
+            font-size: 12px;
+            color: var(--text-light);
+            font-weight: 400;
+            margin-top: 2px;
+        }
+
+        .toggle-options {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+
+        .toggle-option {
+            flex: 1;
+            border: 2px solid #E8E0D5;
+            border-radius: 14px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: var(--cream);
+            position: relative;
+            text-align: left;
+        }
+
+        .toggle-option input[type="checkbox"] {
+            position: absolute; opacity: 0; width: 0; height: 0;
+        }
+
+        .toggle-option:hover {
+            border-color: var(--peach);
+            background: var(--peach-light);
+            transform: translateY(-2px);
+        }
+
+        .toggle-option.selected {
+            border-color: var(--mint-dark);
+            background: #E8F5F2;
+            box-shadow: 3px 3px 0 var(--mint-dark);
+        }
+
+        .check-dot {
+            position: absolute;
+            top: 12px; right: 12px;
+            width: 18px; height: 18px;
+            border-radius: 50%;
+            border: 2px solid #E8E0D5;
+            background: white;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 800;
+            color: white;
+        }
+
+        .toggle-option.selected .check-dot {
+            background: var(--mint-dark);
+            border-color: var(--mint-dark);
+        }
+
+        .toggle-icon { font-size: 24px; margin-bottom: 8px; }
+        .toggle-title { font-size: 13px; font-weight: 800; color: var(--text-dark); }
+        .toggle-desc { font-size: 11px; color: var(--text-light); margin-top: 2px; font-weight: 600; }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--text-dark);
+            color: var(--cream);
+            border: 2px solid var(--text-dark);
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 800;
+            font-family: 'Nunito', sans-serif;
+            cursor: pointer;
+            transition: all 0.2s;
+            letter-spacing: 0.02em;
+            box-shadow: 4px 4px 0 var(--sage-dark);
+        }
+
+        .submit-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 var(--sage-dark);
+        }
+
+        .submit-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 var(--sage-dark);
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            color: var(--text-mid);
+            margin-top: 18px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* ── LOADING OVERLAY ── */
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: var(--cream);
+            z-index: 100;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 32px;
+        }
+
+        .loading-overlay.active {
+            display: flex;
+        }
+
+        /* Bouncing book pages animation */
+        .book-animation {
+            position: relative;
+            width: 80px;
+            height: 80px;
+        }
+
+        .book-page {
+            position: absolute;
+            width: 36px;
+            height: 48px;
+            border-radius: 4px;
+            top: 16px;
+            animation: pageTurn 1.4s ease-in-out infinite;
+        }
+
+        .book-page:nth-child(1) {
+            background: var(--sage);
+            border: 2px solid var(--text-dark);
+            left: 8px;
+            animation-delay: 0s;
+        }
+
+        .book-page:nth-child(2) {
+            background: var(--peach);
+            border: 2px solid var(--text-dark);
+            left: 22px;
+            animation-delay: 0.2s;
+        }
+
+        .book-page:nth-child(3) {
+            background: var(--mint);
+            border: 2px solid var(--text-dark);
+            left: 36px;
+            animation-delay: 0.4s;
+        }
+
+        @keyframes pageTurn {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            30% { transform: translateY(-18px) rotate(-8deg); }
+            60% { transform: translateY(-8px) rotate(4deg); }
+        }
+
+        .loading-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--text-dark);
+            text-align: center;
+        }
+
+        .loading-title em {
+            font-style: italic;
+            color: var(--mint-dark);
+        }
+
+        .loading-subtitle {
+            font-size: 14px;
+            color: var(--text-light);
+            font-weight: 600;
+            text-align: center;
+        }
+
+        /* Rotating messages */
+        .loading-message {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-mid);
+            text-align: center;
+            min-height: 24px;
+            transition: opacity 0.4s;
+        }
+
+        /* Dots progress */
+        .loading-dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .loading-dots span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--sage-dark);
+            animation: dotBounce 1.2s ease-in-out infinite;
+        }
+
+        .loading-dots span:nth-child(2) { animation-delay: 0.2s; background: var(--mint-dark); }
+        .loading-dots span:nth-child(3) { animation-delay: 0.4s; background: var(--peach); border: 2px solid var(--text-dark); }
+
+        @keyframes dotBounce {
+            0%, 100% { transform: translateY(0); opacity: 0.5; }
+            50% { transform: translateY(-10px); opacity: 1; }
+        }
+
+        .bottom-section {
+            background: var(--mint);
+            padding: 40px;
+            text-align: center;
+        }
+
+        .bottom-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-style: italic;
+            color: var(--text-dark);
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-band">
+        <div class="logo-row">
+            <span class="logo-text">EduCase</span>
+            <span class="logo-badge">AI-POWERED</span>
+        </div>
+        <span style="font-size:13px; color: var(--text-mid); font-weight:600;">For K–12 Educators</span>
+    </div>
+
+    <div class="hero">
+        <span class="floatie floatie-1">✏️</span>
+        <span class="floatie floatie-2">🌟</span>
+        <span class="floatie floatie-3">📖</span>
+        <span class="floatie floatie-4">🎨</span>
+        <div class="hero-eyebrow">Welcome to EduCase</div>
+        <h1 class="hero-title">Turn any topic into a<br><em>story students</em> can't put down.</h1>
+        <p class="hero-sub">Generate immersive, multimedia case studies tailored to your classroom.</p>
+    </div>
+
+    <svg class="wave" viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#FDF6EC"/>
+    </svg>
+
+    <div class="intro-section">
+        <div class="intro-label">Introducing</div>
+        <div class="intro-card">
+            <div class="intro-name">✨ EduCase</div>
+            <p class="intro-desc">The AI agent that thinks like a creative director and teaches like your best colleague. Give it your curriculum — it gives you a world.</p>
+        </div>
+    </div>
+
+    <div class="form-section">
+        <div class="section-question">
+            <span class="question-pill">Ready to create your case?</span>
+        </div>
+
+        <div class="form-card">
+            <form action="/generate" method="POST" onsubmit="showLoading()">
+                <div class="field-group">
+                    <label>Grade Level</label>
+                    <input type="text" name="grade" placeholder="e.g. Grade 7" required>
+                </div>
+                <div class="field-group">
+                    <label>Subject & Topic</label>
+                    <input type="text" name="subject" placeholder="e.g. Math — Percentages and Budgeting" required>
+                </div>
+                <div class="field-group">
+                    <label>Classroom Context</label>
+                    <textarea name="context" placeholder="e.g. Students love sports and respond well to real-world scenarios" required></textarea>
+                </div>
+
+                <div class="toggles-header">
+                    <div class="toggles-title">Optional Outputs</div>
+                    <div class="toggles-sub">Select what to include alongside your case study</div>
+                </div>
+
+                <div class="toggle-options">
+                    <div class="toggle-option" id="toggle-image" onclick="toggleOption('image')">
+                        <input type="checkbox" name="include_image" id="include_image" value="yes">
+                        <div class="check-dot" id="check-image">✓</div>
+                        <div class="toggle-icon">🎨</div>
+                        <div class="toggle-title">Illustration</div>
+                        <div class="toggle-desc">AI scene-setting image</div>
+                    </div>
+                    <div class="toggle-option" id="toggle-audio" onclick="toggleOption('audio')">
+                        <input type="checkbox" name="include_audio" id="include_audio" value="yes">
+                        <div class="check-dot" id="check-audio">✓</div>
+                        <div class="toggle-icon">🎙️</div>
+                        <div class="toggle-title">Audio Narration</div>
+                        <div class="toggle-desc">Full case read aloud</div>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">✨ Generate Case Study</button>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- FULL SCREEN LOADING OVERLAY -->
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="book-animation">
+            <div class="book-page"></div>
+            <div class="book-page"></div>
+            <div class="book-page"></div>
+        </div>
+        <div>
+            <div class="loading-title">Writing your <em>case study...</em></div>
+        </div>
+        <div class="loading-message" id="loading-message">✨ Crafting the story...</div>
+        <div class="loading-dots">
+            <span></span><span></span><span></span>
+        </div>
+        <div class="loading-subtitle">This usually takes around 2–4 minutes!</div>
+    </div>
+
+    <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block; margin-top:-2px;">
+        <path d="M0,30 C360,0 1080,60 1440,30 L1440,60 L0,60 Z" fill="#B8E0D4"/>
+    </svg>
+    <div class="bottom-section">
+        <div class="bottom-text">Case-based learning, finally accessible to every classroom. 🌱</div>
+    </div>
+
+    <script>
+        function toggleOption(type) {
+            const option = document.getElementById('toggle-' + type);
+            const checkbox = document.getElementById('include_' + type);
+            option.classList.toggle('selected');
+            checkbox.checked = !checkbox.checked;
+        }
+        const messages = [
+            "✨ Crafting the story...",
+            "🎭 Building your characters...",
+            "🧠 Designing the problem...",
+            "📝 Writing discussion questions...",
+            "🎨 Generating the illustration...",
+            "🎙️ Recording audio narration...",
+            "🌟 Almost ready...",
+        ];
+        let msgIndex = 0;
+
+        function showLoading() {
+            document.getElementById('loading-overlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            cycleMessages();
+        }
+
+        function cycleMessages() {
+            const el = document.getElementById('loading-message');
+            el.style.opacity = 0;
+            setTimeout(() => {
+                msgIndex = (msgIndex + 1) % messages.length;
+                el.textContent = messages[msgIndex];
+                el.style.opacity = 1;
+            }, 400);
+            setTimeout(cycleMessages, 4000);
+        }
+
+        function showLoading_UNUSED() {
+            document.getElementById('loading').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

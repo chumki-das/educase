@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduCase — {{ subject }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #FDF6EC;
+            --soft-green: #C8E6C0;
+            --mid-green: #5BAD72;
+            --dark-green: #2E7D4F;
+            --yellow: #F9E07A;
+            --soft-yellow: #FEF9D7;
+            --border: #E8DECE;
+            --text-dark: #2C2416;
+            --text-mid: #6B5E4E;
+            --text-light: #A89880;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: var(--cream);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* ── HEADER ── */
+        .header {
+            background: var(--soft-green);
+            padding: 14px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px solid var(--border);
+            flex-shrink: 0;
+        }
+
+        .logo {
+            font-family: 'Fraunces', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-dark);
+            text-decoration: none;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-badge {
+            background: white;
+            border: 2px solid var(--text-dark);
+            border-radius: 100px;
+            padding: 5px 14px;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-dark);
+            max-width: 280px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            background: var(--dark-green);
+            color: white;
+            border: 2px solid var(--text-dark);
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 13px;
+            box-shadow: 2px 2px 0px var(--text-dark);
+            transition: all 0.15s;
+            white-space: nowrap;
+        }
+
+        .back-btn:hover {
+            transform: translate(-1px, -1px);
+            box-shadow: 3px 3px 0px var(--text-dark);
+        }
+
+        /* ── MAIN LAYOUT ── */
+        .main {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        /* ── LEFT COLUMN — illustration ── */
+        .left-col {
+            width: 40%;
+            flex-shrink: 0;
+            padding: 24px;
+            border-right: 2px solid var(--border);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .col-label {
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-light);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .case-image {
+            width: 100%;
+            flex: 1;
+            object-fit: cover;
+            border-radius: 16px;
+            border: 2px solid var(--border);
+            box-shadow: 3px 3px 0px var(--border);
+            min-height: 0;
+        }
+
+        /* ── RIGHT COLUMN ── */
+        .right-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            min-width: 0;
+        }
+
+        /* Audio — pinned to top of right col */
+        .audio-bar {
+            padding: 16px 28px;
+            background: white;
+            border-bottom: 2px solid var(--border);
+            flex-shrink: 0;
+        }
+
+        .audio-hint {
+            font-size: 12px;
+            color: var(--text-light);
+            font-style: italic;
+            margin: 6px 0 10px;
+        }
+
+        audio {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        /* Scrollable text area */
+        .story-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 32px 36px;
+        }
+
+        .story-area.full-width {
+            max-width: 820px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Scrollbar */
+        .story-area::-webkit-scrollbar { width: 5px; }
+        .story-area::-webkit-scrollbar-track { background: var(--cream); }
+        .story-area::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+        .story-area::-webkit-scrollbar-thumb:hover { background: var(--text-light); }
+
+        /* ── TYPOGRAPHY ── */
+        .story-body { color: var(--text-dark); font-size: 15px; line-height: 1.85; }
+
+        .story-body .case-title {
+            font-family: 'Fraunces', serif;
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.2;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid var(--border);
+            display: block;
+        }
+
+        .story-body h2 {
+            font-family: 'Fraunces', serif;
+            font-size: 19px;
+            font-weight: 600;
+            color: var(--dark-green);
+            margin: 28px 0 10px;
+        }
+
+        .story-body h3 {
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--mid-green);
+            margin: 20px 0 8px;
+        }
+
+        .story-body p { margin-bottom: 14px; }
+
+        .story-body strong { font-weight: 700; color: var(--text-dark); }
+
+        .story-body ul { list-style: none; margin: 6px 0 14px; }
+        .story-body ul li {
+            padding: 5px 0 5px 20px;
+            position: relative;
+            font-size: 14px;
+            color: var(--text-mid);
+        }
+        .story-body ul li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--mid-green);
+            font-weight: 700;
+        }
+
+        .story-body ol {
+            list-style: none;
+            counter-reset: q;
+            margin: 8px 0 14px;
+        }
+        .story-body ol li {
+            counter-increment: q;
+            padding: 12px 16px 12px 46px;
+            position: relative;
+            font-size: 14px;
+            color: var(--text-mid);
+            background: var(--soft-yellow);
+            border-radius: 12px;
+            margin-bottom: 8px;
+            border: 1.5px solid var(--border);
+            line-height: 1.6;
+        }
+        .story-body ol li::before {
+            content: counter(q);
+            position: absolute;
+            left: 12px;
+            top: 13px;
+            width: 22px;
+            height: 22px;
+            background: var(--mid-green);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 800;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <div class="header">
+        <a href="/" class="logo">📚 EduCase</a>
+        <div class="header-right">
+            <div class="header-badge">{{ grade }} · {{ subject }}</div>
+            <a href="/" class="back-btn">← New Case</a>
+        </div>
+    </div>
+
+    <!-- MAIN -->
+    <div class="main">
+
+        <!-- LEFT: Illustration (only if selected AND successfully generated) -->
+        {% if include_image and image_filename %}
+        <div class="left-col">
+            <div class="col-label">🎨 Scene Illustration</div>
+            <img src="/static/{{ image_filename }}" alt="Case Study Illustration" class="case-image">
+        </div>
+        {% endif %}
+
+        <!-- RIGHT: Audio + Text -->
+        <div class="right-col">
+
+            {% if include_audio and audio_filename %}
+            <div class="audio-bar">
+                <div class="col-label">🎙️ Audio Narration</div>
+                <div class="audio-hint">Play for students who prefer listening along while they read:</div>
+                <audio controls>
+                    <source src="/static/{{ audio_filename }}" type="audio/mpeg">
+                </audio>
+            </div>
+            {% endif %}
+
+            <div class="story-area {% if not (include_image and image_filename) %}full-width{% endif %}">
+                <div class="story-body">{{ case_study | safe }}</div>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
