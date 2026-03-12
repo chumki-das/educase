@@ -2,7 +2,7 @@
 
 > **Gemini Live Agent Challenge Submission — Creative Storyteller Category**
 
-EduCase is an AI agent that transforms any classroom topic into an immersive, multimedia case study — in under 90 seconds. Teachers input their grade level, subject, and classroom context, and EduCase generates a narrative-driven case study complete with a scene illustration and audio narration.
+EduCase is an AI agent that transforms any classroom topic into an immersive, multimedia case study — in just a few minutes! Teachers input their grade level, subject, and classroom context, and EduCase generates a narrative-driven case study complete with a scene illustration and audio narration.
 
 **Live Demo:** https://educase-39686368932.us-central1.run.app
 
@@ -18,7 +18,7 @@ EduCase changes that. A teacher can go from idea to classroom-ready material in 
 
 ## ✨ Features
 
-- **AI-Generated Case Studies** — Gemini 2.0 Flash generates immersive, story-driven case studies tailored to the teacher's grade level, subject, and classroom context
+- **AI-Generated Case Studies** — Gemini 2.0 Flash generates immersive, story-driven case studies tailored to the teacher's grade level, subject, and classroom context. 
 - **Dynamic Scene Illustrations** — Imagen 3 generates a custom storybook-style illustration based on the actual story content
 - **Audio Narration** — Google Cloud Text-to-Speech reads the full case study aloud, making content accessible to struggling readers
 - **Smart Formatting** — Case studies are structured with clear narrative, problem statement, and discussion questions
