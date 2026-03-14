@@ -98,7 +98,7 @@ def generate():
     """
 
     text_response = client.models.generate_content(
-        model="gemini-2.0-flash-001",
+        model="gemini-2.5-flash",
         contents=prompt
     )
     case_study_text = format_case_study(text_response.text)
@@ -108,17 +108,17 @@ def generate():
     if include_image:
         try:
             image_prompt_request = client.models.generate_content(
-                model="gemini-2.0-flash",
+                model="gemini-2.5-flash",
                 contents=f"""Based on this case study, write a single sentence describing a warm,
-                    colorful storybook illustration that captures the setting and key objects from the story.
-                    Do NOT include any people or characters in the description at all.
-                    Focus only on the environment, objects, food, animals, and mood.
-                    The illustration must contain NO text, words, numbers, or letters of any kind.
-                    Case study: {text_response.text[:500]}
+colorful storybook illustration that captures the setting and key objects from the story.
+Do NOT include any people or characters in the description at all.
+Focus only on the environment, objects, food, animals, and mood.
+The illustration must contain NO text, words, numbers, or letters of any kind.
+Case study: {text_response.text[:500]}
 
-                    Reply with only the image description, nothing else."""
+Reply with only the image description, nothing else."""
             )
-            image_prompt = image_prompt_request.text.strip() + "Storybook illustration style, warm colors, no text, no words, no numbers, no letters."
+            image_prompt = image_prompt_request.text.strip() + " Storybook illustration style, warm colors, no text, no words, no numbers, no letters."
             print(f"IMAGE PROMPT: {image_prompt}")
 
             image_response = client.models.generate_images(
@@ -179,3 +179,4 @@ def generate():
 
 if __name__ == "__main__":
     app.run(debug=True)
+    
