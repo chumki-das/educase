@@ -98,7 +98,7 @@ def generate():
     """
 
     text_response = client.models.generate_content(
-        model="gemini-2.0-flash",
+        model="gemini-2.0-flash-001",
         contents=prompt
     )
     case_study_text = format_case_study(text_response.text)
